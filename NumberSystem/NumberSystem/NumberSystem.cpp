@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <map>
 #include <cmath>
+#include <string>
 #include <LIMITS.H>
 using namespace std;
 
@@ -67,6 +68,7 @@ void gotoxy(int xpos, int ypos)
 
 void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int counterNumber, bool negativeFlag, int* factionalMass, int counterFactionalNumber) {
 	gotoxy(5, 2);
+	//short int
 	if (typeOfData == 1) {
 		bites <short int> bit;
 		bit.number = 0;
@@ -80,23 +82,16 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl <<  bit.number << endl;
 
 		for (int z = sizeof(short int) - 1; z >= 0; z--) {
-			for (int i = 32; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-			
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-		
-		
 		}
+
 		
-		cout << endl;
-		system("pause");
+	
 
 	}
+	// unsigned short int
 	else if (typeOfData == 2) {
 		bites <unsigned short int> bit;
 		bit.number = 0;
@@ -105,22 +100,14 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		}
 		cout << endl << bit.number << endl;
 		for (int z = sizeof(unsigned short int) - 1; z >= 0; z--) {
-			for (int i = 32; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
-
 		}
 
-		cout << endl;
-		system("pause");
+		
 	}
+	// int
 	else if (typeOfData == 3) {
 		
 		bites <int> bit;
@@ -133,21 +120,13 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		}
 		cout << endl << bit.number << endl;
 		for (int z = sizeof(int) - 1; z >= 0; z--) {
-			for (int i = 64; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
-
 		}
-		cout << endl;
-		system("pause");
+		
 	}
+	// unsigned int
 	else if (typeOfData == 4) {
 		
 		bites<unsigned int> bit;
@@ -158,21 +137,14 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << bit.number << endl;
 
 		for (int z = sizeof(unsigned int) - 1; z >= 0; z--) {
-			for (int i = 64; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
-
 		}
-		cout << endl;
-		system("pause");
+
+		
 	}
+	// double
 	else if (typeOfData == 5) {
 		bites<double> bit;
 		bit.number = 0;
@@ -189,19 +161,13 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << bit.number << endl;
 
 		for (int z = sizeof(double) - 1; z >= 0; z--) {
-			for (int i = 128; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-			
 		}
 		
 	}
+	//long double
 	else if (typeOfData == 6) {
 		
 		bites<long double> bit;
@@ -217,19 +183,13 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		}
 
 		for (int z = sizeof(long double) - 1; z >= 0; z--) {
-			for (int i = 128; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
 		}
 		
 	}
+	//float
 	else if (typeOfData == 7) {
 		bites<float> bit;
 		bit.number = 0;
@@ -244,20 +204,14 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		}
 
 		for (int z = sizeof(float) - 1; z >= 0; z--) {
-			for (int i = 64; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
 		}
 
 		
 	}
+	//char
 	else if (typeOfData == 8) {
 		bites<char> bit;
 		bit.number = 0;
@@ -271,20 +225,14 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl <<bit.number << endl;
 
 		for (int z = sizeof(char) - 1; z >= 0; z--) {
-			for (int i = 16; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
 		}
-		cout << endl;
-		system("pause");
+																			
+		
 	}
+	// unsigned char
 	else if (typeOfData == 9) {
 		bites<unsigned char> bit;
 		bit.number = 0;
@@ -294,19 +242,11 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		
 		cout << endl <<bit.number << endl;
 		for (int z = sizeof(unsigned char) - 1; z >= 0; z--) {
-			for (int i = 16; i > 0; i >>= 1) {
-				if (i & bit.ch[z]) {
-					cout << 1;
-				}
-				else {
-					cout << 0;
-				}
-
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
 			}
-
 		}
-		cout << endl;
-		system("pause");
+		
 	}
 	else if (typeOfData == 10) {
 	
@@ -511,57 +451,64 @@ bool cheakTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int co
 	return false;
 }
 
-
-
-
 void input(int numberSystem, int typeOfData) {
 	system("cls");
-	cout << "ENTER NUMBER";
+	cout << "ENTER NUMBER" << endl;
+	string availableCharacters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	cout << "Available Characters: ";
+	for (int i = 0; i < numberSystem; i++) {
+		cout << availableCharacters[i];
+	}
+	cout << endl;
 	int keyNumber = _getch();
-	int numberInMass[100];
-	int factionalMass[100];
+	int numberInMass[1000];
+	int factionalMass[1000];
 	int counterNumber = 0;
 	int counterFactionalNumber = 0;
 	bool negativeFlag = false;
 	bool factionalFlag = false;
-	system("cls");
+	//system("cls");
 	bool typeOwerflow = false;
 	while (keyNumber != 13) {
 
-		if (s.find((char)keyNumber) != s.end() && s[(char)keyNumber] <= numberSystem && !factionalFlag) {
-			gotoxy(counterNumber+1, 0);
+		if (s.find((char)keyNumber) != s.end() && s[(char)keyNumber] < numberSystem && !factionalFlag) {
+			gotoxy(0, 5);
+			cout << "                                              ";
+			gotoxy(counterNumber+1, 4);
 			cout << (char)keyNumber;
-			gotoxy(0, 2);
-			cout << "                                             ";
+			/*gotoxy(0, 4);
+			cout << "                                             ";*/
 			numberInMass[counterNumber] = s[(char)keyNumber];
 			counterNumber++;
 		}
-		else if (s.find((char)keyNumber) != s.end() && s[(char)keyNumber] <= numberSystem && factionalFlag) {
-			gotoxy(counterNumber + counterFactionalNumber + 2, 0);
+		else if (s.find((char)keyNumber) != s.end() && s[(char)keyNumber] < numberSystem && factionalFlag) {
+			gotoxy(0, 5); 
+			cout << "                                               ";
+			gotoxy(counterNumber + counterFactionalNumber + 2, 4);
 			cout << (char)keyNumber;
-			gotoxy(0, 2);
-			cout << "                                             ";
+			/*gotoxy(0, 4);
+			cout << "                                             ";*/
 			factionalMass[counterFactionalNumber] = s[(char)keyNumber];
 			counterFactionalNumber++;
 		}
 		else if (keyNumber == 45) {
 			negativeFlag = true;
-			gotoxy(counterNumber, 0);
-			system("cls");
+			gotoxy(counterNumber, 4);
+			//system("cls");
 			cout << "-";
 		}
 		else if (keyNumber == 46) {
 			factionalFlag = true;
-			gotoxy(counterNumber+1, 0);
+			gotoxy(counterNumber+1, 4);
 			cout << ".";
 		}
 		else {
-			gotoxy(0, 2);
+			gotoxy(0, 5);
 			cout << "there is no such symbol in this number system";
 		}
 
 		if (cheakTypeOfData(numberInMass, typeOfData, numberSystem, counterNumber, negativeFlag, factionalMass, counterFactionalNumber)) {
-			gotoxy(counterNumber + counterFactionalNumber + 1, 0);
+			gotoxy(counterNumber + counterFactionalNumber + 1, 4);
 			cout <<endl <<  "ERROR";
 			system("pause");
 			typeOwerflow = true;
@@ -590,7 +537,8 @@ int choiceTypeOfData() {
 	cout << "float" << endl;
 	cout << "char" << endl;
 	cout << "unsigned char" << endl;
-	cout << "bool";
+	cout << "bool" << endl;
+	cout << "exit";
 
 
 	int positionOnArrow = 1;
@@ -615,14 +563,14 @@ int choiceTypeOfData() {
 			if (temp == 72) {
 			
 				if (positionOnArrow == 1) {
-					positionOnArrow = 10;
+					positionOnArrow = 11;
 				}
 				else {
 					positionOnArrow--;
 				}
 			}
 			else if(temp == 80) {
-				if (positionOnArrow == 10) {
+				if (positionOnArrow == 11) {
 					positionOnArrow = 1;
 				}
 				else {
@@ -636,7 +584,6 @@ int choiceTypeOfData() {
 
 		
 
-
 		
 	}
 	
@@ -649,7 +596,7 @@ int choiceSystemNumber() {
 	int systemNumber;
 	do {
 		system("cls");
-		cout << "ENTER THE SYSTEM NUMBER: ";
+		cout << "ENTER THE SYSTEM NUMBER(2-35): ";
 		cin >> systemNumber;
 
 	} while (systemNumber >= 36 || systemNumber <= 1);
@@ -666,8 +613,16 @@ int choiceSystemNumber() {
 
 
 int main() {
-
-	input(choiceSystemNumber(), choiceTypeOfData());
+	while(true){
+		system("cls");
+		int choice = choiceTypeOfData();
+		if (choice == 11) {
+			exit(0);
+		}
+		else {
+			input(choiceSystemNumber(), choice);
+		}
+	}
 	
 
 	return 0;
