@@ -67,7 +67,6 @@ void SetColor(int text, ConsoleColor background)
 	SetConsoleTextAttribute(hStdOut, (WORD)((background << 0) | text));
 }
 
-
 void gotoxy(int xpos, int ypos)
 {
 	COORD scrn;
@@ -79,7 +78,7 @@ void gotoxy(int xpos, int ypos)
 	SetConsoleCursorPosition(hOuput, scrn);
 }
 
-void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int counterNumber, bool negativeFlag, int* factionalMass, int counterFactionalNumber) {
+void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int counterNumber, bool negativeFlag, int* factionalMass, int counterFactionalNumber,int colorForChangesBites) {
 	gotoxy(5, 2);
 	bool lastNum;
 	int count = 0;
@@ -136,7 +135,7 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(short int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (numberBites.find(z * 8 + i)!=numberBites.end()) {
-					SetColor(Red, Black);
+					SetColor(colorForChangesBites, Black);
 					cout << bool(bit.ch[z] & (1 << i));
 				}
 				else {
@@ -858,7 +857,7 @@ bool cheakTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int co
 	return false;
 }
 
-void input(int numberSystem, int typeOfData) {
+void input(int numberSystem, int typeOfData, int colorForChangesBites) {
 	system("cls");
 	cout << "ENTER NUMBER" << endl;
 	string availableCharacters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -926,12 +925,12 @@ void input(int numberSystem, int typeOfData) {
 		keyNumber = _getch();
 	}
 	if (!typeOwerflow) {
-		translateOnTypeOfData(numberInMass, typeOfData, numberSystem, counterNumber, negativeFlag, factionalMass, counterFactionalNumber);
+		translateOnTypeOfData(numberInMass, typeOfData, numberSystem, counterNumber, negativeFlag, factionalMass, counterFactionalNumber, colorForChangesBites);
 	}
 
 }
 
-int choiceTypeOfData() {
+int choiceParamMenu() {
 	
 
 	cout << endl;
@@ -945,6 +944,7 @@ int choiceTypeOfData() {
 	cout << "char" << endl;
 	cout << "unsigned char" << endl;
 	cout << "bool" << endl;
+	cout << "color" << endl;
 	cout << "exit";
 
 
@@ -955,13 +955,13 @@ int choiceTypeOfData() {
 	while (true) {
 		
 
-		gotoxy(20, positionOnArrow);
+		gotoxy(10, positionOnArrow);
 
 		cout << "<----";
 
 		int keyNumber = _getch();
 
-		gotoxy(20, positionOnArrow);
+		gotoxy(10, positionOnArrow);
 
 		cout << "     ";
 
@@ -970,14 +970,14 @@ int choiceTypeOfData() {
 			if (temp == 72) {
 			
 				if (positionOnArrow == 1) {
-					positionOnArrow = 11;
+					positionOnArrow = 12;
 				}
 				else {
 					positionOnArrow--;
 				}
 			}
 			else if(temp == 80) {
-				if (positionOnArrow == 11) {
+				if (positionOnArrow == 12) {
 					positionOnArrow = 1;
 				}
 				else {
@@ -1013,6 +1013,66 @@ int choiceSystemNumber() {
 
 }
 
+int choiceColorForChangesBites() {
+	system("cls");
+
+	//cout << endl;
+	cout << "Black" << endl;
+	cout << "Blue" << endl;
+	cout << "Green" << endl;
+	cout << "LightBlue" << endl;
+	cout << "Red" << endl;
+	cout << "Magenta" << endl;
+	cout << "Yellow" << endl;
+	cout << "White" << endl;
+
+
+	int positionOnArrow = 0;
+
+
+
+	while (true) {
+
+
+		gotoxy(20, positionOnArrow);
+
+		cout << "<----";
+
+		int keyNumber = _getch();
+
+		gotoxy(20, positionOnArrow);
+
+		cout << "     ";
+
+		if (keyNumber == 224) {
+			int temp = _getch();
+			if (temp == 72) {
+
+				if (positionOnArrow == 0) {
+					positionOnArrow = 7;
+				}
+				else {
+					positionOnArrow--;
+				}
+			}
+			else if (temp == 80) {
+				if (positionOnArrow == 7) {
+					positionOnArrow = 0;
+				}
+				else {
+					positionOnArrow++;
+				}
+			}
+		}
+		else if (keyNumber == 13) {
+			return positionOnArrow;
+		}
+
+
+
+
+	}
+}
 
 
 
@@ -1020,14 +1080,19 @@ int choiceSystemNumber() {
 
 
 int main() {
+	int  colorForChangesBites = 7;
 	while(true){
 		system("cls");
-		int choice = choiceTypeOfData();
-		if (choice == 11) {
+		int choice = choiceParamMenu();
+		if (choice == 12) {
 			exit(0);
 		}
+		if (choice == 11) {
+			
+			colorForChangesBites = choiceColorForChangesBites();
+		}
 		else {
-			input(choiceSystemNumber(), choice);
+			input(choiceSystemNumber(), choice, colorForChangesBites);
 		}
 	}
 
