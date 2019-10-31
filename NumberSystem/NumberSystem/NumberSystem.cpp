@@ -6,6 +6,7 @@
 #include <string>
 #include <LIMITS.H>
 #include <set>
+//#include <graphics.h>
 
 
 using namespace std;
@@ -57,6 +58,14 @@ union bites {
 	char ch[sizeof(T)];
 	long long int num;
 };
+
+enum ConsoleColor { Black, Blue, Green, LightBlue, Red, Magenta, Yellow, White };
+
+void SetColor(int text, ConsoleColor background)
+{
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hStdOut, (WORD)((background << 0) | text));
+}
 
 
 void gotoxy(int xpos, int ypos)
@@ -126,10 +135,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(short int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (1 << i));
+				if (numberBites.find(z * 8 + i)!=numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 	
@@ -176,10 +192,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(unsigned short int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (1 << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 
@@ -230,10 +253,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (1 << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 		
@@ -282,10 +312,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(unsigned int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (1 << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 
@@ -346,10 +383,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(double) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (a << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 	}
@@ -408,10 +452,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(double) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (a << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 
@@ -466,10 +517,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(float) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (a << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 		
@@ -522,10 +580,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(char) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (a << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 																			
@@ -575,10 +640,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl << endl;
 		for (int z = sizeof(char) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
-				cout << bool(bit.ch[z] & (a << i));
+				if (numberBites.find(z * 8 + i) != numberBites.end()) {
+					SetColor(Red, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					SetColor(White, Black);
+					cout << bool(bit.ch[z] & (1 << i));
+				}
 			}
 		}
-
+		SetColor(White, Black);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 		
