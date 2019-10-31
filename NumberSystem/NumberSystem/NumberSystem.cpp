@@ -5,6 +5,9 @@
 #include <cmath>
 #include <string>
 #include <LIMITS.H>
+#include <set>
+
+
 using namespace std;
 
 map <char, int> s = {
@@ -52,6 +55,7 @@ template <typename T>
 union bites {
 	T number = 0;
 	char ch[sizeof(T)];
+	long long int num;
 };
 
 
@@ -68,6 +72,8 @@ void gotoxy(int xpos, int ypos)
 
 void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int counterNumber, bool negativeFlag, int* factionalMass, int counterFactionalNumber) {
 	gotoxy(5, 2);
+	bool lastNum;
+	int count = 0;
 	//short int
 	if (typeOfData == 1) {
 		bites <short int> bit;
@@ -81,13 +87,51 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		}
 		cout << endl <<  bit.number << endl;
 
+		
+
 		for (int z = sizeof(short int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
 
-		
+
+
+		cout << endl;
+
+		set <int> numberBites;
+		for (int z = sizeof(short int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 1 && i == 7) {
+					lastNum = bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
+						count++;
+						numberBites.insert(z*8+i);
+						numberBites.insert(z*8 + i+1);
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+					else{
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+				}
+			}
+		}
+		for (auto now : numberBites) {
+			bit.number = (bit.number & (1 << now)) ? (bit.number & ~(1 << now)) : (bit.number | (1 << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(short int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 	
 
 	}
@@ -104,6 +148,40 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
+
+		set <int> numberBites;
+		for (int z = sizeof(unsigned short int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 1 && i == 7) {
+					lastNum = bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i);
+						numberBites.insert(z * 8 + i + 1);
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+				}
+			}
+		}
+		for (auto now : numberBites) {
+			bit.number = (bit.number & (1 << now)) ? (bit.number & ~(1 << now)) : (bit.number | (1 << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(unsigned short int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 
 		
 	}
@@ -124,6 +202,40 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
+
+		set <int> numberBites;
+		for (int z = sizeof(int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 3 && i == 7) {
+					lastNum = bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i);
+						numberBites.insert(z * 8 + i + 1);
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+				}
+			}
+		}
+		for (auto now : numberBites) {
+			bit.number = (bit.number & (1 << now)) ? (bit.number & ~(1 << now)) : (bit.number | (1 << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 		
 	}
 	// unsigned int
@@ -141,6 +253,41 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
+
+		set <int> numberBites;
+		for (int z = sizeof(unsigned int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 3 && i == 7) {
+					lastNum = bool(bit.ch[z] & (1 << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i);
+						numberBites.insert(z * 8 + i + 1);
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (1 << i));
+					}
+				}
+			}
+		}
+		for (auto now : numberBites) {
+			
+			bit.number = (bit.number & (1 << now)) ? (bit.number & ~(1 << now)) : (bit.number | (1 << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(unsigned int) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (1 << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 
 		
 	}
@@ -166,9 +313,49 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 			}
 		}
 		
+		set <int> numberBites;
+		long long int a = 1;
+		cout << endl;
+		for (int z = sizeof(double) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 7 && i == 7) {
+					lastNum = bool(bit.ch[z] & (a << i));
+					
+				}
+				else {
+					if (bool(bit.ch[z] & (a << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i + 1);
+						numberBites.insert(z * 8 + i);
+						lastNum = bool(bit.ch[z] & (a << i));
+						
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (a << i));
+						
+					}
+				}
+			}
+		}
+		
+		for (auto now : numberBites) {
+			bit.num = (bit.num& (a << now)) ? (bit.num & ~(a << now)) : (bit.num | (a << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(double) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (a << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 	}
 	//long double
 	else if (typeOfData == 6) {
+		cout << endl << endl << endl;
 		
 		bites<long double> bit;
 		bit.number = 0;
@@ -187,10 +374,51 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
-		
+
+		set <int> numberBites;
+		long long int a = 1;
+		cout << endl;
+		for (int z = sizeof(double) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 7 && i == 7) {
+					lastNum = bool(bit.ch[z] & (a << i));
+
+				}
+				else {
+					if (bool(bit.ch[z] & (a << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i + 1);
+						numberBites.insert(z * 8 + i);
+						lastNum = bool(bit.ch[z] & (a << i));
+
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (a << i));
+
+					}
+				}
+			}
+		}
+
+		for (auto now : numberBites) {
+			bit.num = (bit.num & (a << now)) ? (bit.num & ~(a << now)) : (bit.num | (a << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(double) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (a << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
+
 	}
-	//float
+	//float 
 	else if (typeOfData == 7) {
+		cout << endl << endl << endl;
 		bites<float> bit;
 		bit.number = 0;
 		for (int i = 0, j = counterNumber - 1; i < counterNumber; i++, j--) {
@@ -209,6 +437,41 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 			}
 		}
 
+		set <int> numberBites;
+		long long int a = 1;
+		for (int z = sizeof(float) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (z == 3 && i == 7) {
+					lastNum = bool(bit.ch[z] & (a << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (a << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i + 1);
+						numberBites.insert(z * 8 + i);
+						lastNum = bool(bit.ch[z] & (a << i));
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (a << i));
+					}
+				}
+			}
+		}
+
+		for (auto now : numberBites) {
+			bit.num = (bit.num & (a << now)) ? (bit.num & ~(a << now)) : (bit.num | (a << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(float) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (a << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 		
 	}
 	//char
@@ -229,6 +492,42 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
+
+		set <int> numberBites;
+		long long int a = 1;
+		for (int z = sizeof(char) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (i == 7) {
+					lastNum = bool(bit.ch[z] & (a << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (a << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i + 1);
+						numberBites.insert(z * 8 + i);
+						lastNum = bool(bit.ch[z] & (a << i));
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (a << i));
+					}
+				}
+			}
+		}
+
+		for (auto now : numberBites) {
+			bit.num = (bit.num & (a << now)) ? (bit.num & ~(a << now)) : (bit.num | (a << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(char) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (a << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 																			
 		
 	}
@@ -246,6 +545,42 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 				cout << bool(bit.ch[z] & (1 << i));
 			}
 		}
+
+		set <int> numberBites;
+		long long int a = 1;
+		for (int z = sizeof(char) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				if (i == 7) {
+					lastNum = bool(bit.ch[z] & (a << i));
+				}
+				else {
+					if (bool(bit.ch[z] & (a << i)) != lastNum) {
+						count++;
+						numberBites.insert(z * 8 + i + 1);
+						numberBites.insert(z * 8 + i);
+						lastNum = bool(bit.ch[z] & (a << i));
+					}
+					else {
+						lastNum = bool(bit.ch[z] & (a << i));
+					}
+				}
+			}
+		}
+
+		for (auto now : numberBites) {
+			bit.num = (bit.num & (a << now)) ? (bit.num & ~(a << now)) : (bit.num | (a << now));
+		}
+
+
+		cout << endl << endl;
+		for (int z = sizeof(char) - 1; z >= 0; z--) {
+			for (int i = 7; i >= 0; i--) {
+				cout << bool(bit.ch[z] & (a << i));
+			}
+		}
+
+		cout << endl;
+		cout << "cout = " << count << " new number = " << bit.number;
 		
 	}
 	else if (typeOfData == 10) {
@@ -300,7 +635,7 @@ bool cheakTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int co
 	}
 	else if (typeOfData == 3) {
 
-		int number = 0, maxValue = INT_MAX, minValue = INT_MIN;
+		int number = 0, maxValue = 2147483646, minValue = INT_MIN;
 
 		
 
@@ -461,8 +796,8 @@ void input(int numberSystem, int typeOfData) {
 	}
 	cout << endl;
 	int keyNumber = _getch();
-	int numberInMass[1000];
-	int factionalMass[1000];
+	int numberInMass[2000];
+	int factionalMass[2000];
 	int counterNumber = 0;
 	int counterFactionalNumber = 0;
 	bool negativeFlag = false;
@@ -623,7 +958,8 @@ int main() {
 			input(choiceSystemNumber(), choice);
 		}
 	}
-	
+
+
 
 	return 0;
 }
