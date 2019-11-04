@@ -82,7 +82,7 @@ void render(int position, bool point, int positionOy) {
 	for (int i = 0; i < position-1; i++) {
 		gotoxy(i, positionOy);
 		cout << point;
-		Sleep(10);
+		Sleep(1);
 		gotoxy(i, positionOy);
 		cout << ' ';
 	}
@@ -113,6 +113,130 @@ void animation(char* bit, int colorForBites, int colorForBackground, int colorFo
 
 }
 
+
+void renderForGraphic(int numSymbol, int OXposition, int OYposition) {
+	for (int i = 128; i >= OXposition; i--) {
+		gotoxy(i, OYposition);
+		cout << (char)numSymbol;
+		Sleep(1);
+		gotoxy(i, OYposition);
+		cout << " ";
+	}
+	gotoxy(OXposition, OYposition);
+	cout << (char)numSymbol;
+
+}
+
+
+void buildGraphic(char* bit, int sizE) {
+
+	gotoxy(0, 14);
+	
+	int countOxPosition = 0;
+	int* mas = new int[sizE*8];
+	int j = 0, k;
+	for (int z = sizE - 1; z >= 0; z--) {
+		for (int i = 7; i >= 0; i--) {
+			k = bool(bit[z] & (1 << i));
+			mas[j] = k;
+			j++;
+		}
+	}
+
+	bool flag0 = false, flag1 = false;
+	for (int i = 0; i < sizE * 8-1; i++) {
+
+		if (mas[i] == 0) {
+			//gotoxy(countOxPosition, 16);
+			flag0 = true;
+			if (flag1) {
+				//cout << (char)192;
+				renderForGraphic(192, countOxPosition, 16);
+				countOxPosition++;
+				flag1 = false;
+			}
+			else {
+				renderForGraphic(196, countOxPosition, 16);
+				countOxPosition++;
+				//cout << (char)196;
+
+			}
+			if (mas[i + 1] == 1) {
+				renderForGraphic(217, countOxPosition, 16);
+				//countOxPosition++;
+				//cout << (char)217;
+			}
+			else {
+				renderForGraphic(196, countOxPosition, 16);
+				countOxPosition++;
+				//cout << (char)196;
+			}
+
+		}
+		else {
+			//gotoxy(countOxPosition, 15);
+			flag1 = true;
+			if (flag0) {
+				renderForGraphic(218, countOxPosition, 15);
+				countOxPosition++;
+				//cout << (char)218;
+				flag0 = false;
+			}
+			else {
+				renderForGraphic(196, countOxPosition, 15);
+				countOxPosition++;
+				//cout << (char)196;
+
+			}
+			if (mas[i + 1] == 0) {
+				renderForGraphic(191, countOxPosition, 15);
+				//countOxPosition++;
+				//cout << (char)191;
+			}
+			else {
+				renderForGraphic(196, countOxPosition, 15);
+				countOxPosition++;
+				//cout << (char)196;
+			}
+		
+		}
+
+		
+
+	}
+	if (mas[sizE * 8 - 1] == 0){
+		gotoxy(countOxPosition, 16);
+		if (flag1) {
+			renderForGraphic(192, countOxPosition, 16);
+			countOxPosition++;
+			renderForGraphic(196, countOxPosition, 16);
+			//cout << (char)192 << (char)196;
+		}
+		else {
+			//cout << (char)196 << (char)196;
+			renderForGraphic(196, countOxPosition, 16);
+			countOxPosition++;
+			renderForGraphic(196, countOxPosition, 16);
+		}
+	}
+	else {
+		gotoxy(countOxPosition, 15);
+		if (flag0) {
+			renderForGraphic(218, countOxPosition, 15);
+			countOxPosition++;
+			renderForGraphic(196, countOxPosition, 15);
+			//cout << (char)218 << (char)196;
+		}
+		else {
+			renderForGraphic(196, countOxPosition, 15);
+			countOxPosition++;
+			renderForGraphic(196, countOxPosition, 15);
+			//cout << (char)196 << (char)196;
+		}
+	}
+
+	gotoxy(0, 16);
+}
 
 
 void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, int counterNumber, bool negativeFlag, int* factionalMass, int counterFactionalNumber,int colorForChangesBites, int colorForBackground, int colorForBites) {
@@ -174,6 +298,7 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << "cout = " << count << " new number = " << bit.number;
 		
 	
+		buildGraphic(bit.ch, sizeof(short int));
 
 	}
 	// unsigned short int
@@ -222,7 +347,7 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 
-		
+		buildGraphic(bit.ch, sizeof(short int));
 	}
 	// int
 	else if (typeOfData == 3) {
@@ -274,7 +399,9 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		SetColor(White, colorForBackground);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
-		
+
+		buildGraphic(bit.ch, sizeof(int));
+
 	}
 	// unsigned int
 	else if (typeOfData == 4) {
@@ -323,6 +450,7 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 
+		buildGraphic(bit.ch, sizeof(int));
 		
 	}
 	// double
@@ -384,6 +512,9 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		SetColor(White, colorForBackground);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
+
+		buildGraphic(bit.ch, sizeof(double));
+
 	}
 	//long double
 	else if (typeOfData == 6) {
@@ -444,6 +575,8 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 
+		buildGraphic(bit.ch, sizeof(long double));
+
 	}
 	//float 
 	else if (typeOfData == 7) {
@@ -502,6 +635,8 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl;
 		cout << "cout = " << count << " new number = " << bit.number;
 		
+		buildGraphic(bit.ch, sizeof(float));
+
 	}
 	//char
 	else if (typeOfData == 8) {
@@ -553,7 +688,8 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		SetColor(White, colorForBackground);
 		cout << endl;
 		cout << "cout = " << count << " new number = " << (int) bit.number << "new symbol: " << bit.number;
-																			
+				
+		buildGraphic(bit.ch, sizeof(char));
 		
 	}
 	// unsigned char
@@ -605,6 +741,8 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << endl;
 		cout << "cout = " << count << " new number = " << (int) bit.number << "new symbol: " << bit.number;
 		
+		buildGraphic(bit.ch, sizeof(char));
+
 	}
 	
 
