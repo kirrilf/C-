@@ -1,50 +1,50 @@
 ﻿  NumberSystem.cpp
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(91,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(91,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(91,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(91,58): warning C4244:             T=short
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(91,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(158,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(158,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(158,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(158,58): warning C4244:             T=unsigned short
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(158,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(216,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(216,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(216,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(216,58): warning C4244:             T=int
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(216,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(276,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(276,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(276,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(276,58): warning C4244:             T=unsigned int
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(276,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(475,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(475,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(475,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(475,58): warning C4244:             T=float
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(475,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(478,59): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(478,59): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(478,59): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(478,59): warning C4244:             T=float
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(478,59): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(539,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(539,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(539,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(539,58): warning C4244:             T=char
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(539,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(603,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(603,58): warning C4244:         with
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(603,58): warning C4244:         [
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(603,58): warning C4244:             T=unsigned char
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(603,58): warning C4244:         ]
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(687,55): warning C4244:  +=: преобразование "double" в "short", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(703,55): warning C4244:  +=: преобразование "double" в "unsigned short", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(723,55): warning C4244:  +=: преобразование "double" в "int", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(739,55): warning C4244:  +=: преобразование "double" в "unsigned int", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(797,55): warning C4244:  +=: преобразование "double" в "float", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(818,55): warning C4244:  +=: преобразование "double" в "char", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(834,55): warning C4244:  +=: преобразование "double" в "unsigned char", возможна потеря данных
-F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(848,55): warning C4244:  +=: преобразование "double" в "short", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(128,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(128,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(128,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(128,58): warning C4244:             T=short
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(128,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(184,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(184,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(184,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(184,58): warning C4244:             T=unsigned short
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(184,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(233,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(233,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(233,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(233,58): warning C4244:             T=int
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(233,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(285,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(285,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(285,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(285,58): warning C4244:             T=unsigned int
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(285,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(454,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(454,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(454,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(454,58): warning C4244:             T=float
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(454,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(457,59): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(457,59): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(457,59): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(457,59): warning C4244:             T=float
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(457,59): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(511,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(511,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(511,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(511,58): warning C4244:             T=char
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(511,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(564,58): warning C4244:  +=: преобразование "double" в "T", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(564,58): warning C4244:         with
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(564,58): warning C4244:         [
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(564,58): warning C4244:             T=unsigned char
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(564,58): warning C4244:         ]
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(631,55): warning C4244:  +=: преобразование "double" в "short", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(647,55): warning C4244:  +=: преобразование "double" в "unsigned short", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(667,55): warning C4244:  +=: преобразование "double" в "int", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(683,55): warning C4244:  +=: преобразование "double" в "unsigned int", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(741,55): warning C4244:  +=: преобразование "double" в "float", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(762,55): warning C4244:  +=: преобразование "double" в "char", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(778,55): warning C4244:  +=: преобразование "double" в "unsigned char", возможна потеря данных
+F:\C++ (ЭВМ)\NumberSystem\NumberSystem\NumberSystem.cpp(792,55): warning C4244:  +=: преобразование "double" в "short", возможна потеря данных
   NumberSystem.vcxproj -> F:\C++ (ЭВМ)\NumberSystem\Debug\NumberSystem.exe
