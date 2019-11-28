@@ -61,6 +61,87 @@ union bites {
 
 enum ConsoleColor { Black, Blue, Green, LightBlue, Red, Magenta, Yellow, White };
 
+BOOL Line(HDC hdc, int x1, int y1, int x2, int y2) {
+	MoveToEx(hdc, x1, y1, NULL);
+	return LineTo(hdc, x2, y2);
+}
+
+
+void graphicRender(char* bit, int sizE) {
+
+	
+	int* mas = new int[sizE * 8];
+	int j = 0, k;
+	for (int z = sizE - 1; z >= 0; z--) {
+		for (int i = 7; i >= 0; i--) {
+			k = bool(bit[z] & (1 << i));
+			mas[j] = k;
+			j++;
+		}
+	}
+
+
+
+	HWND hWnd = GetConsoleWindow();
+	HDC hDc = GetDC(hWnd);
+	COLORREF color = RGB(255, 255, 255);
+	HPEN pen = CreatePen(PS_SOLID, 1, color);
+	SelectObject(hDc, pen);
+
+
+	color = RGB(255, 255, 255);
+
+	int y = 170;
+	
+	//Line(hDc, 0, y, 5 * 400, y);
+
+	double period = 6.30;
+
+	for (int i = 0; i < 16; i++) {
+		if (mas[i] == 0) {
+			color = RGB(0, 0, 255);
+			for (double x1 = 0; x1 < period; x1 += 0.01) {
+				int y1 = sin(2 * x1) * 20;
+				SetPixel(hDc, x1 * 5 + i * 32.75, y - y1, color);
+			}
+		}
+		else {
+			color = RGB(255, 0, 0);
+			for (double x1 = 0; x1 < period; x1 += 0.01) {
+				int y1 = sin(4 * x1) * 20;
+				SetPixel(hDc, x1 * 5 + i * 32.75, y - y1, color);
+
+			}
+		}
+	}
+
+
+
+
+
+
+
+}
+
+void clear() {
+
+	HWND hWnd = GetConsoleWindow();
+	HDC hDc = GetDC(hWnd);
+	int y = 170;
+
+	COLORREF color = RGB(0, 0, 0);
+	HPEN pen = CreatePen(PS_SOLID, 1, color);
+	SelectObject(hDc, pen);
+	//Line(hDc, 0, y, 5 * 400, y);
+	for (int i = 130; i < 200; i++) {
+		color = RGB(0, 0, 0);
+		Line(hDc, 0, i, 5 * 400, i);
+	}
+
+
+}
+
+
 void SetColor(int text, int background)
 {
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -82,7 +163,7 @@ void render(int position, bool point, int positionOy) {
 	for (int i = 0; i < position-1; i++) {
 		gotoxy(i, positionOy);
 		cout << point;
-		Sleep(1);
+		Sleep(5);
 		gotoxy(i, positionOy);
 		cout << ' ';
 	}
@@ -103,8 +184,18 @@ void animation(char* bit, int colorForBites, int colorForBackground, int colorFo
 			else {
 				SetColor(colorForBites, colorForBackground);
 			}
-			
-			render(positionCount--, bool(bit[z] & (1 << i)), positionOy);
+			char g = 1 << i;
+			char q = bit[z];
+			char simb = 0;
+			__asm {
+				mov al, q
+				mov bl, g
+				and al, bl
+				mov simb, al
+			}
+			bool num = (bool)simb;
+			render(positionCount--, num, positionOy);
+						
 		}
 	}
 
@@ -115,10 +206,10 @@ void animation(char* bit, int colorForBites, int colorForBackground, int colorFo
 
 
 void renderForGraphic(int numSymbol, int OXposition, int OYposition) {
-	for (int i = 128; i >= OXposition; i--) {
+	for (int i = 50; i >= OXposition; i--) {
 		gotoxy(i, OYposition);
 		cout << (char)numSymbol;
-		Sleep(1);
+		Sleep(0);
 		gotoxy(i, OYposition);
 		cout << " ";
 	}
@@ -252,7 +343,12 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 			bit.number += (numberInMass[i] * pow(numberSystem, j));
 		}
 		if (negativeFlag) {
-			bit.number*=-1;
+			//bit.number*=-1;
+			__asm {
+				mov ax, bit.number
+				neg ax
+				mov bit.number, ax
+			}
 		}
 		cout << endl << "In 10 system: " <<  bit.number << endl;
 
@@ -266,17 +362,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(short int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 1 && i == 7) {
-					lastNum = bool(bit.ch[z] & (1 << i));
+					//lastNum = bool(bit.ch[z] & (1 << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
 						count++;
 						numberBites.insert(z*8+i);
 						numberBites.insert(z*8 + i+1);
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else{
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -298,7 +424,8 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		cout << "cout = " << count << " new number = " << bit.number;
 		
 	
-		buildGraphic(bit.ch, sizeof(short int));
+		graphicRender(bit.ch, sizeof(short int));
+		//buildGraphic(bit.ch, sizeof(short int));
 
 	}
 	// unsigned short int
@@ -319,17 +446,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(unsigned short int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 1 && i == 7) {
-					lastNum = bool(bit.ch[z] & (1 << i));
+					//lastNum = bool(bit.ch[z] & (1 << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
 						count++;
 						numberBites.insert(z * 8 + i);
 						numberBites.insert(z * 8 + i + 1);
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -358,7 +515,12 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 			bit.number += (numberInMass[i] * pow(numberSystem, j));
 		}
 		if (negativeFlag) {
-			bit.number *= -1;
+			//bit.number *= -1;
+			__asm {
+				mov eax, bit.number
+				neg eax
+				mov bit.number, eax
+			}
 		}
 		cout << endl << "In 10 system: " << bit.number << endl;
 		
@@ -372,17 +534,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 3 && i == 7) {
-					lastNum = bool(bit.ch[z] & (1 << i));
+					//lastNum = bool(bit.ch[z] & (1 << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
 						count++;
 						numberBites.insert(z * 8 + i);
 						numberBites.insert(z * 8 + i + 1);
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -421,17 +613,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(unsigned int) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 3 && i == 7) {
-					lastNum = bool(bit.ch[z] & (1 << i));
+					//lastNum = bool(bit.ch[z] & (1 << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (1 << i)) != lastNum) {
 						count++;
 						numberBites.insert(z * 8 + i);
 						numberBites.insert(z * 8 + i + 1);
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (1 << i));
+						//lastNum = bool(bit.ch[z] & (1 << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -481,7 +703,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(double) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 7 && i == 7) {
-					lastNum = bool(bit.ch[z] & (a << i));
+					//lastNum = bool(bit.ch[z] & (a << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 					
 				}
 				else {
@@ -489,11 +721,31 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 						count++;
 						numberBites.insert(z * 8 + i + 1);
 						numberBites.insert(z * 8 + i);
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 						
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 						
 					}
 				}
@@ -543,7 +795,17 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(double) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 7 && i == 7) {
-					lastNum = bool(bit.ch[z] & (a << i));
+					//lastNum = bool(bit.ch[z] & (a << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 
 				}
 				else {
@@ -551,11 +813,31 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 						count++;
 						numberBites.insert(z * 8 + i + 1);
 						numberBites.insert(z * 8 + i);
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 
 					}
 				}
@@ -606,17 +888,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(float) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (z == 3 && i == 7) {
-					lastNum = bool(bit.ch[z] & (a << i));
+					//lastNum = bool(bit.ch[z] & (a << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (a << i)) != lastNum) {
 						count++;
 						numberBites.insert(z * 8 + i + 1);
 						numberBites.insert(z * 8 + i);
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -660,17 +972,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(char) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (i == 7) {
-					lastNum = bool(bit.ch[z] & (a << i));
+					//lastNum = bool(bit.ch[z] & (a << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (a << i)) != lastNum) {
 						count++;
 						numberBites.insert(z * 8 + i + 1);
 						numberBites.insert(z * 8 + i);
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -712,17 +1054,47 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 		for (int z = sizeof(char) - 1; z >= 0; z--) {
 			for (int i = 7; i >= 0; i--) {
 				if (i == 7) {
-					lastNum = bool(bit.ch[z] & (a << i));
+					//lastNum = bool(bit.ch[z] & (a << i));
+					char g = 1 << i;
+					char q = bit.ch[z];
+					char simb = 0;
+					__asm {
+						mov al, q
+						mov bl, g
+						and al, bl
+						mov simb, al
+					}
+					lastNum = (bool)simb;
 				}
 				else {
 					if (bool(bit.ch[z] & (a << i)) != lastNum) {
 						count++;
 						numberBites.insert(z * 8 + i + 1);
 						numberBites.insert(z * 8 + i);
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 					else {
-						lastNum = bool(bit.ch[z] & (a << i));
+						//lastNum = bool(bit.ch[z] & (a << i));
+						char g = 1 << i;
+						char q = bit.ch[z];
+						char simb = 0;
+						__asm {
+							mov al, q
+							mov bl, g
+							and al, bl
+							mov simb, al
+						}
+						lastNum = (bool)simb;
 					}
 				}
 			}
@@ -748,6 +1120,7 @@ void translateOnTypeOfData(int* numberInMass, int typeOfData, int numberSystem, 
 
 	cout << endl;
 	system("pause");
+	clear();
 	
 }
 
